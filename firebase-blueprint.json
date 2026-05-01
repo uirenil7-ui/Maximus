@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Represents a user and their overall Maximus score.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "overallScore": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email"]
+    },
+    "Scan": {
+      "title": "Facial Analysis Scan",
+      "description": "Contains results of an AI scan.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "scores": {
+          "type": "object",
+          "properties": {
+            "symmetry": { "type": "number" },
+            "jawline": { "type": "number" },
+            "skin": { "type": "number" },
+            "eyes": { "type": "number" }
+          }
+        },
+        "feedback": { "type": "string" },
+        "recommendations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "Routine": {
+      "title": "Daily Routine",
+      "description": "User's personalized improvement tasks.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "completed": { "type": "boolean" },
+              "category": { "type": "string", "enum": ["Grooming", "Posture", "Fitness", "Skincare"] }
+            }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User home documents"
+    },
+    "/users/{userId}/scans/{scanId}": {
+      "schema": "Scan",
+      "description": "History of facial scans"
+    },
+    "/users/{userId}/routines/{routineId}": {
+      "schema": "Routine",
+      "description": "Personalized routines"
+    }
+  }
+}

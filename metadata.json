@@ -1,0 +1,9 @@
+{
+  "name": "Maximus",
+  "description": "AI-powered looksmaxxing app featuring facial analysis, personalized grooming routines, and progress tracking with a premium iOS aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
